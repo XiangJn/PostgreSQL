@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository
 public interface GenreRepository extends JpaRepository<Genre,Integer> {
-    Genre findGenreBynaam(String naam);
-    List<Genre> findGenresByGenreContaining(String naam);
+    List<Genre> findGenreByNameContaining(String name);
+
+    List<Genre> findGenreByNameContains(String name);
 }

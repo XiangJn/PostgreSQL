@@ -13,26 +13,24 @@ import java.util.List;
 @RestController
 public class GenreController {
 
+
+
     @Autowired
     private GenreRepository genreRepository;
-
-    @GetMapping("/genres/naam/{naam}")
-    public List<Genre> getGenresByGenre(@PathVariable String naam) {
-        return genreRepository.findGenresByGenreContaining(naam);
-    }
-
-    @GetMapping("/genres/{naam}")
-    public Genre getGenreBynaam(@PathVariable String naam) {
-        return genreRepository.findGenreBynaam(naam);
-    }
 
     @PostConstruct
     public void fillDB(){
         if(genreRepository.count()==0) {
-            genreRepository.save(new Genre("Action"));
-            genreRepository.save(new Genre("Romance"));
+            genreRepository.save(new Genre(28,"Action","Ac"));
+            genreRepository.save(new Genre(10749,"Romance","Ro"));
         }
-
-        System.out.println(genreRepository.findGenreBynaam("Action").getNaam());
+//        System.out.println("Genre test: " + genreRepository.findGenreByNameContains("Action"));
     }
+
+    @GetMapping("/Genre/name/{name}")
+    public List<Genre> getGenreByName(@PathVariable String name) {
+        return genreRepository.findGenreByNameContains(name);
+    }
+
+
 }

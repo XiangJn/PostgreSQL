@@ -6,30 +6,50 @@ import javax.persistence.*;
 public class Genre {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String naam;
+    private int genreId;
+    private String name;
+    private String abbreviation ;
 
-    public Genre(String naam) {
-        this.naam = naam;
+    public Genre(int genreId, String name, String abbreviation) {
+        this.genreId = genreId;
+        this.name = name;
+        this.abbreviation = abbreviation;
     }
 
     public Genre() {
     }
 
-
-
     public int getId() {
         return id;
     }
 
-
-    public String getNaam() {
-        return naam;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setNaam(String naam) {
-        this.naam = naam;
+    public int getGenreId() {
+        return genreId;
+    }
+
+    public void setGenreId(int genreId) {
+        this.genreId = genreId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAbbreviation() {
+        return abbreviation;
+    }
+
+    public void setAbbreviation(String abbreviation) {
+        this.abbreviation = abbreviation;
     }
 }
 
