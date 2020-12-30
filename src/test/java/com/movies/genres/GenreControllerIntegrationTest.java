@@ -46,31 +46,39 @@ public class GenreControllerIntegrationTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-//    @Test
-//    public void givenGenre_whenGetGenreByNameAndAbbreviation_thenReturnJsonReview() throws Exception {
-//
-//        mockMvc.perform(get("/genre/name/{name}/abbreviation/{abbreviation}", "Action", "Ac"))
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.name", is("Action")))
-//                .andExpect(jsonPath("$.abbreviation", is("Ac")));
-//    }
     @Test
-    public void givenGenre_whenGetGenreByName_thenReturnJsonReview() throws Exception {
+    public void givenGenre_whenGetGenreByNameAndAbbreviation_thenReturnJsonGenre() throws Exception {
+        List<Genre> genreList = new ArrayList<>();
+        genreList.add(genre1);
+        mockMvc.perform(get("/genre/name/{name}/abbreviation/{abbreviation}", "Action", "Ac"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].name", is("Action")))
+                .andExpect(jsonPath("$[0].abbreviation", is("Ac")));
+    }
+    @Test
+    public void givenGenre_whenGetGenreByName_thenReturnJsonGenre() throws Exception {
+        List<Genre> genreList = new ArrayList<>();
+        genreList.add(genre1);
         mockMvc.perform(get("/genre/name/{name}", "Action"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name", is("Action")))
-                .andExpect(jsonPath("$.abbreviation", is("Ac")));
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].name", is("Action")))
+                .andExpect(jsonPath("$[0].abbreviation", is("Ac")));
     }
 
     @Test
-    public void givenGenre_whenGetGenreByAbbreviation_thenReturnJsonReview() throws Exception {
+    public void givenGenre_whenGetGenreByAbbreviation_thenReturnJsonGenre() throws Exception {
+        List<Genre> genreList = new ArrayList<>();
+        genreList.add(genre2);
         mockMvc.perform(get("/genre/abbreviation/{abbreviation}", "Ad"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name", is("Adventure")))
-                .andExpect(jsonPath("$.abbreviation", is("Ad")));
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].name", is("Adventure")))
+                .andExpect(jsonPath("$[0].abbreviation", is("Ad")));
     }
 
 }

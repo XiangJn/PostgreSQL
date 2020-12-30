@@ -22,6 +22,8 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@SpringBootTest
+@AutoConfigureMockMvc
 public class GenreControllerUnitTests {
     @Autowired
     private MockMvc mockMvc;
@@ -29,21 +31,52 @@ public class GenreControllerUnitTests {
     @MockBean
     private GenreRepository GenreRepository;
 
-    private ObjectMapper mapper = new ObjectMapper();
-
     @Test
-    public void givenReview_whenGetReviewByUserIdAndISBN_thenReturnJsonReview() throws Exception {
+    public void givenGenre_whenGetGenreByNameAndAbbreviation_thenReturnJsonGenre() throws Exception {
         Genre genre1 = new Genre("Action","Ac");
-        Genre genre2 = new Genre("Adventure","Ad");
+        List<Genre> genreList = new ArrayList<>();
+        genreList.add(genre1);
 
-
-        given(GenreRepository.findGenreByNameAndAbbreviation("Action","Ac"));
+        given(GenreRepository.findGenreByNameAndAbbreviation("Action","Ac")).willReturn(genreList);
 
         mockMvc.perform(get("/genre/name/{name}/abbreviation/{abbreviation}","Action","Ac"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name", is("Action")))
-                .andExpect(jsonPath("$.abbreviation", is("Ac")));
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].name", is("Action")))
+                .andExpect(jsonPath("$[0].abbreviation", is("Ac")));
+    }
+
+    @Test
+    public void givenGenre_whenGetGenreByName_thenReturnJsonGenre() throws Exception {
+        Genre genre1 = new Genre("Action","Ac");
+        List<Genre> genreList = new ArrayList<>();
+        genreList.add(genre1);
+
+        given(GenreRepository.findGenreByNameContains("Action")).willReturn(genreList);
+
+        mockMvc.perform(get("/genre/name/{name}","Action"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].name", is("Action")))
+                .andExpect(jsonPath("$[0].abbreviation", is("Ac")));
+    }
+
+    @Test
+    public void givenGenre_whenGetGenreByAbbreviation_thenReturnJsonGenre() throws Exception {
+        Genre genre1 = new Genre("Action","Ac");
+        List<Genre> genreList = new ArrayList<>();
+        genreList.add(genre1);
+
+        given(GenreRepository.findGenreByAbbreviationContains("Ac")).willReturn(genreList);
+
+        mockMvc.perform(get("/genre/abbreviation/{abbreviation}","Ac"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].name", is("Action")))
+                .andExpect(jsonPath("$[0].abbreviation", is("Ac")));
     }
 
 

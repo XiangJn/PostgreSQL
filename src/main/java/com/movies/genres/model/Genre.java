@@ -11,30 +11,24 @@ public class Genre {
     private String name;
     private String abbreviation ;
 
-    public Genre( String name, String abbreviation) {
+    public Genre() {
+    }
+
+    public Genre(String name, String abbreviation) {
         this.name = name;
         this.abbreviation = abbreviation;
     }
 
-    public Genre() {
+    public Long getId() {
+        return id;
     }
-
-
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getAbbreviation() {
         return abbreviation;
-    }
-
-    public void setAbbreviation(String abbreviation) {
-        this.abbreviation = abbreviation;
     }
 }
 
