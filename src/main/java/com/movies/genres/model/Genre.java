@@ -6,7 +6,8 @@ import javax.persistence.*;
 public class Genre {
 
     @Id
-    private int id;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String abbreviation ;
 
@@ -18,13 +19,6 @@ public class Genre {
     public Genre() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
 
     public String getName() {

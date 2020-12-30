@@ -46,14 +46,31 @@ public class GenreControllerIntegrationTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
+//    @Test
+//    public void givenGenre_whenGetGenreByNameAndAbbreviation_thenReturnJsonReview() throws Exception {
+//
+//        mockMvc.perform(get("/genre/name/{name}/abbreviation/{abbreviation}", "Action", "Ac"))
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.name", is("Action")))
+//                .andExpect(jsonPath("$.abbreviation", is("Ac")));
+//    }
     @Test
-    public void givenGenre_whenGetGenreByNameAndAbbreviation_thenReturnJsonReview() throws Exception {
-
-        mockMvc.perform(get("/genre/name/{name}/abbreviation/{abbreviation}", "Action", "Ac"))
+    public void givenGenre_whenGetGenreByName_thenReturnJsonReview() throws Exception {
+        mockMvc.perform(get("/genre/name/{name}", "Action"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is("Action")))
                 .andExpect(jsonPath("$.abbreviation", is("Ac")));
+    }
+
+    @Test
+    public void givenGenre_whenGetGenreByAbbreviation_thenReturnJsonReview() throws Exception {
+        mockMvc.perform(get("/genre/abbreviation/{abbreviation}", "Ad"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is("Adventure")))
+                .andExpect(jsonPath("$.abbreviation", is("Ad")));
     }
 
 }

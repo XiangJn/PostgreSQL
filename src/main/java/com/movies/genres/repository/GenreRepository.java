@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface GenreRepository extends JpaRepository<Genre,Integer> {
+public interface GenreRepository extends JpaRepository<Genre,Long> {
     List<Genre> findGenreByNameContains(String name);
     List<Genre> findGenreByAbbreviationContains(String abbreviation);
     List<Genre> findGenreByNameAndAbbreviation(String name,String abbreviation);

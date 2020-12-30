@@ -39,4 +39,10 @@ public class GenreController {
         return genreRepository.findGenreByAbbreviationContains(abbreviation);
     }
 
+//    @GetMapping("/genre/name/{name}/abbreviation/{abbreviation}\"")
+//    public List<Genre> getGenreByNameAndAbbreviation(@PathVariable String name,@PathVariable String abbreviation) {
+//        return genreRepository.findGenreByNameAndAbbreviation(name,abbreviation);
+//    }
+
+
 }
