@@ -21,16 +21,22 @@ public class GenreController {
     @PostConstruct
     public void fillDB(){
         if(genreRepository.count()==0) {
-            genreRepository.save(new Genre(28,"Action","Ac"));
-            genreRepository.save(new Genre(10749,"Romance","Ro"));
+            genreRepository.save(new Genre("Action","Ac"));
+            genreRepository.save(new Genre("Romance","Ro"));
         }
-//        System.out.println("Genre test: " + genreRepository.findGenreByNameContains("Action"));
+        System.out.println("Genre test: " + genreRepository.findGenreByNameContains("Action"));
     }
 
-    @GetMapping("/Genre/name/{name}")
+
+
+    @GetMapping("/genre/name/{name}")
     public List<Genre> getGenreByName(@PathVariable String name) {
         return genreRepository.findGenreByNameContains(name);
     }
 
+    @GetMapping("/genre/abbreviation/{abbreviation}")
+    public List<Genre> getGenreByAbbreviation(@PathVariable String abbreviation) {
+        return genreRepository.findGenreByAbbreviationContains(abbreviation);
+    }
 
 }

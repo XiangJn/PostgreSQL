@@ -7,12 +7,10 @@ public class Genre {
 
     @Id
     private int id;
-    private int genreId;
     private String name;
     private String abbreviation ;
 
-    public Genre(int genreId, String name, String abbreviation) {
-        this.genreId = genreId;
+    public Genre( String name, String abbreviation) {
         this.name = name;
         this.abbreviation = abbreviation;
     }
@@ -28,13 +26,6 @@ public class Genre {
         this.id = id;
     }
 
-    public int getGenreId() {
-        return genreId;
-    }
-
-    public void setGenreId(int genreId) {
-        this.genreId = genreId;
-    }
 
     public String getName() {
         return name;
