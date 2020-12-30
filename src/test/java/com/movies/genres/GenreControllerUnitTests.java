@@ -37,7 +37,7 @@ public class GenreControllerUnitTests {
         Genre genre2 = new Genre("Adventure","Ad");
 
 
-        given(GenreRepository.findGenreByNameContains("Action"));
+        given(GenreRepository.findGenreByNameAndAbbreviation("Action","Ac"));
 
         mockMvc.perform(get("/genre/name/{name}/abbreviation/{abbreviation}","Action","Ac"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
