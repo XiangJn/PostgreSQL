@@ -35,7 +35,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 8
-
+      steps:
       - name: Set up postgreSQl
         uses: harmon758/postgresql-action@v1
         with:
