@@ -42,7 +42,6 @@ jobs:
       - name: Test and build project
         run: mvn -f pom.xml clean install
 
-
       - name: Upload Maven build artifact
         uses: actions/upload-artifact@v1
         with:
